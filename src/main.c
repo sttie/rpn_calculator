@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
 
     // для всех 256 строк выделяем память под 11 символов
     for (int i = 0; i < 256; i++)
-        exit_array[i] = malloc(MAXINTCHAR*sizeof(char));
+    exit_array[i] = malloc(MAXINTCHAR*sizeof(char));
 
     // стек операций
     stack_256 operation_stack;
@@ -44,7 +44,7 @@ void parse(char* source, char** exit_array, stack_256* operation_stack)
 {
     // int = 4 байта => максимально возможное число - десятизначное + '\0'
     char buffer[MAXINTCHAR];
-	memset(buffer, 0, MAXINTCHAR);
+memset(buffer, 0, MAXINTCHAR);
 
     // индекс для buffer
     int buffer_index = 0;
