@@ -16,7 +16,7 @@ int is_number(char c);
 
 int main(int argc, char* argv[])
 {
-    if (argc == 1 || argc > 2)
+    if (argc != 2)
     {
         printf("Введите числовое выражение!\n");
         return 0;
@@ -27,9 +27,7 @@ int main(int argc, char* argv[])
 
     // для всех 256 строк выделяем память под 11 символов
     for (int i = 0; i < 256; i++)
-    {
         exit_array[i] = malloc(MAXINTCHAR*sizeof(char));
-    }
 
     // стек операций
     stack_256 operation_stack;
@@ -90,9 +88,7 @@ void parse(char* source, char** exit_array, stack_256* operation_stack)
             // ============================================
             // если стек операций пуст, то просто кладем оператор на стек
             if (get_size(operation_stack) == 0)
-            {
                 push(*source, operation_stack);
-            }
 
             // если не пуст, то
             else
@@ -158,16 +154,18 @@ int eval(char** exit_array)
             op2 = current_numbers[cn_index-1];
             cn_index -= 2;
 
-            if (!strcmp(*exit_array, "+")) 		current_numbers[cn_index] = op1 + op2;
-            else if (!strcmp(*exit_array, "-")) current_numbers[cn_index] = op1 - op2;
-            else if (!strcmp(*exit_array, "*")) current_numbers[cn_index] = op1 * op2;
-            else if (!strcmp(*exit_array, "/")) current_numbers[cn_index] = op1 / op2;
+            if (!strcmp(*exit_array, "+"))
+				current_numbers[cn_index] = op1 + op2;
+            else if (!strcmp(*exit_array, "-"))
+				current_numbers[cn_index] = op1 - op2;
+            else if (!strcmp(*exit_array, "*"))
+				current_numbers[cn_index] = op1 * op2;
+            else if (!strcmp(*exit_array, "/"))
+				current_numbers[cn_index] = op1 / op2;
         }
 
         else 
-        {
         	current_numbers[cn_index] = atoi(*exit_array);
-        }
 
         cn_index++;
         exit_array++;
